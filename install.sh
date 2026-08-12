@@ -3,10 +3,14 @@
 set -e
 
 # ==========================================
-# Shell Setup - Arch Linux
+# Shell Setup
+# Arch Linux / Ubuntu
 # ==========================================
 
-# El script debe ejecutarse como root mediante sudo.
+# ==========================================
+# Comprobar sudo
+# ==========================================
+
 if [[ "$EUID" -ne 0 ]]; then
     echo "Este script debe ejecutarse con sudo."
     echo
@@ -15,7 +19,10 @@ if [[ "$EUID" -ne 0 ]]; then
     exit 1
 fi
 
-# Usuario que ejecutó sudo.
+# ==========================================
+# Detectar usuario
+# ==========================================
+
 if [[ -z "$SUDO_USER" || "$SUDO_USER" == "root" ]]; then
     echo "No se pudo determinar el usuario que ejecutó sudo."
     echo "Ejecuta el script desde un usuario normal usando sudo."
@@ -24,38 +31,90 @@ fi
 
 USER_NAME="$SUDO_USER"
 
-echo "=========================================="
-echo "          Shell Setup - Arch Linux"
-echo "=========================================="
-echo
-echo "Usuario: $USER_NAME"
-echo
+# ==========================================
+# Detectar distribución
+# ==========================================
 
-# Comprobar Arch Linux.
-if [[ ! -f /etc/arch-release ]]; then
-    echo "Error: este script está diseñado para Arch Linux."
+if [[ ! -f /etc/os-release ]]; then
+    echo "No se pudo determinar la distribución."
     exit 1
 fi
 
-echo "✓ Arch Linux detectado."
+source /etc/os-release
+
+case "$ID" in
+    arch)
+        DISTRO="Arch Linux"
+        PACKAGE_MANAGER="pacman"
+        ;;
+
+    ubuntu)
+        DISTRO="Ubuntu"
+        PACKAGE_MANAGER="apt"
+        ;;
+
+    *)
+        echo "Distribución no soportada: $ID"
+        echo
+        echo "Actualmente Shell Setup soporta:"
+        echo "  - Arch Linux"
+        echo "  - Ubuntu"
+        exit 1
+        ;;
+esac
+
+# ==========================================
+# Encabezado
+# ==========================================
+
+echo "=========================================="
+echo "             Shell Setup"
+echo "=========================================="
+echo
+echo "Sistema:  $DISTRO"
+echo "Usuario:  $USER_NAME"
+echo "Gestor:   $PACKAGE_MANAGER"
 echo
 
 # ==========================================
-# Paquetes
+# Definir paquetes
 # ==========================================
 
-PACKAGES=(
-    zsh
-    eza
-    bat
-    btop
-    fzf
-    fd
-    ripgrep
-    lazygit
-    fastfetch
-    ttf-jetbrains-mono-nerd
-)
+if [[ "$ID" == "arch" ]]; then
+
+    PACKAGES=(
+        zsh
+        eza
+        bat
+        btop
+        fzf
+        fd
+        ripgrep
+        lazygit
+        fastfetch
+        ttf-jetbrains-mono-nerd
+    )
+
+elif [[ "$ID" == "ubuntu" ]]; then
+
+    PACKAGES=(
+        zsh
+        eza
+        bat
+        btop
+        fzf
+        fd-find
+        ripgrep
+        lazygit
+        fastfetch
+        fonts-jetbrains-mono
+    )
+
+fi
+
+# ==========================================
+# Mostrar paquetes
+# ==========================================
 
 echo "Se instalarán/verificarán estos paquetes:"
 echo
@@ -70,11 +129,28 @@ if [[ "$ANSWER" =~ ^[Nn]$ ]]; then
     exit 0
 fi
 
+# ==========================================
+# Instalar paquetes
+# ==========================================
+
 echo
 echo "Instalando paquetes..."
 echo
 
-pacman -S --needed "${PACKAGES[@]}"
+if [[ "$ID" == "arch" ]]; then
+
+    pacman -S --needed "${PACKAGES[@]}"
+
+elif [[ "$ID" == "ubuntu" ]]; then
+
+    apt update
+    apt install -y "${PACKAGES[@]}"
+
+fi
+
+# ==========================================
+# Resultado
+# ==========================================
 
 echo
 echo "=========================================="
@@ -83,4 +159,6 @@ echo "=========================================="
 echo
 echo "Paquetes instalados/verificados correctamente."
 echo
-echo "Usuario configurado: $USER_NAME"
+echo "Sistema:  $DISTRO"
+echo "Usuario:  $USER_NAME"
+echo

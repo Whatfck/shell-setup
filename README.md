@@ -1,6 +1,6 @@
 # Shell Setup
 
-Script personal para preparar mi entorno de terminal en **Arch Linux**.
+Script personal para preparar mi entorno de terminal en **Linux**.
 
 La idea de este proyecto es automatizar la instalación de las herramientas de consola que utilizo habitualmente y, posteriormente, añadir la configuración de mi shell y mis dotfiles.
 
@@ -8,13 +8,16 @@ La idea de este proyecto es automatizar la instalación de las herramientas de c
 
 🚧 **En desarrollo**
 
-Actualmente, el script instala las herramientas principales de mi entorno de terminal.
+Actualmente, el script instala las herramientas principales de mi entorno de terminal y soporta:
+
+* Arch Linux
+* Ubuntu
 
 La configuración de Zsh y los dotfiles se añadirán en futuras versiones.
 
 ## Requisitos
 
-* Arch Linux
+* Arch Linux o Ubuntu
 * Un usuario normal con permisos de `sudo`
 * Conexión a Internet
 * Git
@@ -34,7 +37,14 @@ Después ejecuta el instalador con `sudo`:
 sudo ./install.sh
 ```
 
-El script detectará el usuario que ejecutó `sudo` y realizará la instalación mediante `pacman`.
+El script detectará automáticamente la distribución Linux y utilizará el gestor de paquetes correspondiente.
+
+Actualmente:
+
+* **Arch Linux** → `pacman`
+* **Ubuntu** → `apt`
+
+El script también detectará el usuario que ejecutó `sudo`, por lo que la instalación está orientada al **usuario que ejecuta el script**, no a `root`.
 
 ## Herramientas instaladas
 
@@ -51,6 +61,18 @@ Actualmente se instalan:
 * **fastfetch** — información del sistema
 * **JetBrains Mono Nerd Font** — fuente con iconos para terminales
 
+Los nombres de los paquetes pueden variar dependiendo de la distribución. El script se encarga de utilizar el nombre correspondiente para cada sistema.
+
+## Uso
+
+El instalador está diseñado para ser ejecutado desde un usuario normal mediante `sudo`:
+
+```bash
+sudo ./install.sh
+```
+
+No está diseñado para ejecutarse directamente como `root`.
+
 ## Próximamente
 
 El proyecto irá incorporando progresivamente:
@@ -61,8 +83,9 @@ El proyecto irá incorporando progresivamente:
 * Plugins de Zsh
 * Aliases personales
 * Dotfiles
-* Configuración específica para macOS
-* Soporte para otras distribuciones Linux
+* Soporte para macOS
+* Soporte para Fedora y otras distribuciones Linux
+* Detección y manejo de paquetes que no estén disponibles directamente en los repositorios de cada distribución
 
 ## Nota
 
