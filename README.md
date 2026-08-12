@@ -27,7 +27,7 @@ La configuración de Zsh y los dotfiles se añadirán en futuras versiones.
 Clona el repositorio:
 
 ```bash
-git clone <REPOSITORY_URL>
+git clone https://github.com/Whatfck/shell-setupß
 cd shell-setup
 ```
 
