@@ -25,7 +25,6 @@ plugins=(
     zsh-syntax-highlighting
 )
 
-# Cargar Oh My Zsh solamente si está instalado.
 if [[ -f "$ZSH/oh-my-zsh.sh" ]]; then
     source "$ZSH/oh-my-zsh.sh"
 fi
@@ -35,18 +34,15 @@ fi
 # Aliases
 # ==========================================
 
-# Navegación
-
 alias ..='cd ..'
 alias ...='cd ../..'
-
-
-# Terminal
 
 alias c='clear'
 
 
-# Listado de archivos
+# ==========================================
+# eza
+# ==========================================
 
 if command -v eza >/dev/null 2>&1; then
     alias ll='eza -lah --icons'
@@ -69,17 +65,6 @@ fi
 
 
 # ==========================================
-# Herramientas
-# ==========================================
-
-# Fastfetch
-
-if command -v fastfetch >/dev/null 2>&1; then
-    fastfetch
-fi
-
-
-# ==========================================
 # Editor
 # ==========================================
 
@@ -90,9 +75,18 @@ fi
 
 
 # ==========================================
-# Powerlevel10k
+# Powerlevel10k configuration
 # ==========================================
 
 if [[ -f "$HOME/.p10k.zsh" ]]; then
     source "$HOME/.p10k.zsh"
+fi
+
+
+# ==========================================
+# Fastfetch
+# ==========================================
+
+if command -v fastfetch >/dev/null 2>&1; then
+    fastfetch
 fi

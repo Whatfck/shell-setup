@@ -23,20 +23,15 @@ La configuración de Zsh y los dotfiles se añadirán en futuras versiones.
 * Git
 
 ## Instalación
-
-Clona el repositorio:
 ```bash
+# Clona el repositorio:
 git clone https://github.com/Whatfck/shell-setup
 cd shell-setup
-```
 
-Dale permisos de ejecución al instalador:
-```bash
+# Dale permisos de ejecución al instalador:
 chmod +x install.sh
-```
 
-Después ejecuta el instalador con `sudo`:
-```bash
+# Después ejecuta el instalador con sudo:
 sudo ./install.sh
 ```
 

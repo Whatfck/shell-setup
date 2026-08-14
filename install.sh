@@ -317,3 +317,16 @@ echo "Sistema:  $DISTRO"
 echo "Usuario:  $USER_NAME"
 echo "Shell:    $ZSH_PATH"
 echo
+
+# ==========================================
+# Cerrar sesión
+# ==========================================
+
+echo
+read -rp "¿Quieres cerrar la sesión para aplicar los cambios? [Y/n] " ANSWER
+
+if [[ ! "$ANSWER" =~ ^[Nn]$ ]]; then
+    echo
+    echo "Cerrando sesión..."
+    sudo -u "$USER_NAME" loginctl terminate-user "$USER_NAME"
+fi
