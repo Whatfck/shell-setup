@@ -167,6 +167,30 @@ chsh -s "$ZSH_PATH" "$USER_NAME"
 echo "✓ Zsh configurado como shell predeterminado para $USER_NAME."
 
 # ==========================================
+# Instalar dotfiles
+# ==========================================
+
+DOTFILES_DIR="$(dirname "$(realpath "$0")")/dotfiles"
+USER_HOME="$(eval echo "~$USER_NAME")"
+
+if [[ -f "$DOTFILES_DIR/.zshrc" ]]; then
+
+    echo
+    echo "Instalando configuración de Zsh..."
+
+    cp "$DOTFILES_DIR/.zshrc" "$USER_HOME/.zshrc"
+
+    chown "$USER_NAME:$USER_NAME" "$USER_HOME/.zshrc"
+
+    echo "✓ .zshrc instalado correctamente."
+
+else
+
+    echo
+    echo "⚠ No se encontró dotfiles/.zshrc."
+fi
+
+# ==========================================
 # Resultado
 # ==========================================
 
