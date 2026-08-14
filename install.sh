@@ -149,6 +149,24 @@ elif [[ "$ID" == "ubuntu" ]]; then
 fi
 
 # ==========================================
+# Configurar Zsh como shell predeterminado
+# ==========================================
+
+ZSH_PATH="$(command -v zsh)"
+
+if [[ -z "$ZSH_PATH" ]]; then
+    echo "Error: no se encontró Zsh después de la instalación."
+    exit 1
+fi
+
+echo
+echo "Configurando Zsh como shell predeterminado..."
+
+chsh -s "$ZSH_PATH" "$USER_NAME"
+
+echo "✓ Zsh configurado como shell predeterminado para $USER_NAME."
+
+# ==========================================
 # Resultado
 # ==========================================
 
@@ -161,4 +179,5 @@ echo "Paquetes instalados/verificados correctamente."
 echo
 echo "Sistema:  $DISTRO"
 echo "Usuario:  $USER_NAME"
+echo "Shell:    $ZSH_PATH"
 echo
