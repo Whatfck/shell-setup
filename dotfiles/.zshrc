@@ -17,13 +17,17 @@ fi
 
 export ZSH="$HOME/.oh-my-zsh"
 
-ZSH_THEME="robbyrussell"
+ZSH_THEME="powerlevel10k/powerlevel10k"
 
-plugins=(git)
+plugins=(
+    git
+    zsh-autosuggestions
+    zsh-syntax-highlighting
+)
 
 # Cargar Oh My Zsh solamente si está instalado.
 if [[ -f "$ZSH/oh-my-zsh.sh" ]]; then
-  source "$ZSH/oh-my-zsh.sh"
+    source "$ZSH/oh-my-zsh.sh"
 fi
 
 
@@ -90,8 +94,5 @@ fi
 # ==========================================
 
 if [[ -f "$HOME/.p10k.zsh" ]]; then
-    [[ -f "$ZSH_CUSTOM/themes/powerlevel10k.zsh-theme" ]] && \
-        source "$ZSH_CUSTOM/themes/powerlevel10k.zsh-theme"
-
     source "$HOME/.p10k.zsh"
 fi
