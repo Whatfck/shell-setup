@@ -8,12 +8,19 @@ La idea de este proyecto es automatizar la instalación de las herramientas de c
 
 🚧 **En desarrollo**
 
-Actualmente, el script instala las herramientas principales de mi entorno de terminal y soporta:
+Actualmente, el script instala las herramientas principales de mi entorno de terminal y también configura:
+
+* Zsh como shell predeterminada
+* Oh My Zsh
+* Powerlevel10k
+* zsh-autosuggestions
+* zsh-syntax-highlighting
+* Dotfiles básicos de Zsh
+
+Soporta:
 
 * Arch Linux
 * Ubuntu
-
-La configuración de Zsh y los dotfiles se añadirán en futuras versiones.
 
 ## Requisitos
 
@@ -61,16 +68,14 @@ Actualmente se instalan:
 
 Los nombres de los paquetes pueden variar dependiendo de la distribución. El script se encarga de utilizar el nombre correspondiente para cada sistema.
 
+Al abrir una nueva sesión de Zsh, `fastfetch` se ejecuta automáticamente para mostrar información del sistema. Si usas Powerlevel10k con instant prompt, el aviso de salida en la inicialización queda silenciado para evitar mensajes molestos al iniciar sesión.
+
 ## Próximamente
 
 El proyecto irá incorporando progresivamente:
 
-* Configuración de Zsh
-* Powerlevel10k
-* Oh My Zsh
-* Plugins de Zsh
 * Aliases personales
-* Dotfiles
+* Más dotfiles
 * Soporte para macOS
 * Soporte para Fedora y otras distribuciones Linux
 * Detección y manejo de paquetes que no estén disponibles directamente en los repositorios de cada distribución
