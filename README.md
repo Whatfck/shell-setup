@@ -25,14 +25,17 @@ La configuración de Zsh y los dotfiles se añadirán en futuras versiones.
 ## Instalación
 
 Clona el repositorio:
-
 ```bash
 git clone https://github.com/Whatfck/shell-setupß
 cd shell-setup
 ```
 
-Después ejecuta el instalador con `sudo`:
+Dale permisos de ejecución al instalador:
+```bash
+chmod +x install.sh
+```
 
+Después ejecuta el instalador con `sudo`:
 ```bash
 sudo ./install.sh
 ```
@@ -62,16 +65,6 @@ Actualmente se instalan:
 * **JetBrains Mono Nerd Font** — fuente con iconos para terminales
 
 Los nombres de los paquetes pueden variar dependiendo de la distribución. El script se encarga de utilizar el nombre correspondiente para cada sistema.
-
-## Uso
-
-El instalador está diseñado para ser ejecutado desde un usuario normal mediante `sudo`:
-
-```bash
-sudo ./install.sh
-```
-
-No está diseñado para ejecutarse directamente como `root`.
 
 ## Próximamente
 
